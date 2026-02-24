@@ -1,6 +1,7 @@
 import db from '@/lib/db';
 import { notFound } from 'next/navigation';
 import PrintButton from './PrintButton';
+import WhatsAppButton from './WhatsAppButton';
 import InvoiceTemplate from './InvoiceTemplate';
 
 export const dynamic = 'force-dynamic';
@@ -56,6 +57,13 @@ export default async function InvoicePage({
                 </div>
                 <div className="flex gap-4">
                     <a href="/" className="btn btn-outline" style={{ textDecoration: 'none' }}>Back to Dashboard</a>
+                    <WhatsAppButton
+                        phone={invoice.customer_phone}
+                        customerName={invoice.customer_name}
+                        invoiceNumber={invoice.invoice_number}
+                        amount={invoice.grand_total}
+                    />
+                    <a href={`/invoices/${invoice.id}/certificate`} target="_blank" className="btn" style={{ background: '#ca8a04', color: '#fff', textDecoration: 'none', border: 'none' }}>🛡️ Certificate</a>
                     <PrintButton />
                 </div>
             </div>

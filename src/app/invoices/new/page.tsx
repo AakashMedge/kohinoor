@@ -87,6 +87,14 @@ export default function NewInvoicePage() {
                                     <label className="form-label">Aadhaar No.</label>
                                     <input type="text" name="customerAadhaar" className="form-control" placeholder="Customer Aadhaar" />
                                 </div>
+                                <div className="form-group mb-0">
+                                    <label className="form-label">Date of Birth</label>
+                                    <input type="date" name="customerDob" className="form-control" />
+                                </div>
+                                <div className="form-group mb-0">
+                                    <label className="form-label">Anniversary</label>
+                                    <input type="date" name="customerAnniversary" className="form-control" />
+                                </div>
                             </div>
                         </div>
 

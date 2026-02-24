@@ -14,7 +14,8 @@
     "postgres": "^3.4.8",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-to-print": "^3.3.0"
+    "react-to-print": "^3.3.0",
+    "recharts": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

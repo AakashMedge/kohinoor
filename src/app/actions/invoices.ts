@@ -20,6 +20,11 @@ export async function createInvoice(formData: FormData) {
   const customerPan = formData.get('customerPan') as string || null;
   const customerAadhaar = formData.get('customerAadhaar') as string || null;
   const customerAddress = formData.get('customerAddress') as string || null;
+  const customerDobStr = formData.get('customerDob') as string;
+  const customerAnniversaryStr = formData.get('customerAnniversary') as string;
+
+  const customerDob = customerDobStr ? customerDobStr : null;
+  const customerAnniversary = customerAnniversaryStr ? customerAnniversaryStr : null;
 
   // Create / Find customer
   let customerId;
@@ -27,9 +32,9 @@ export async function createInvoice(formData: FormData) {
   if (existingCustomers.length > 0) {
     customerId = existingCustomers[0].id;
     // Update missing fields
-    await db`UPDATE customers SET pan = COALESCE(${customerPan}, pan), aadhaar = COALESCE(${customerAadhaar}, aadhaar), address = COALESCE(${customerAddress}, address) WHERE id = ${customerId}`;
+    await db`UPDATE customers SET pan = COALESCE(${customerPan}, pan), aadhaar = COALESCE(${customerAadhaar}, aadhaar), address = COALESCE(${customerAddress}, address), dob = COALESCE(${customerDob}, dob), anniversary = COALESCE(${customerAnniversary}, anniversary) WHERE id = ${customerId}`;
   } else {
-    const newCust = await db`INSERT INTO customers (shop_id, name, phone, pan, aadhaar, address) VALUES (${SHOP_ID}, ${customerName}, ${customerPhone}, ${customerPan}, ${customerAadhaar}, ${customerAddress}) RETURNING id`;
+    const newCust = await db`INSERT INTO customers (shop_id, name, phone, pan, aadhaar, address, dob, anniversary) VALUES (${SHOP_ID}, ${customerName}, ${customerPhone}, ${customerPan}, ${customerAadhaar}, ${customerAddress}, ${customerDob}, ${customerAnniversary}) RETURNING id`;
     customerId = newCust[0].id;
   }
 
